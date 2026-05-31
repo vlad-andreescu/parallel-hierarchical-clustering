@@ -10,7 +10,7 @@
 // ─────────────────────────────────────────────
 
 struct Point {
-    double x, y;
+    std::vector<double> features;
 };
 
 // One row of the dendrogram: clusters i and j merged at distance d,
@@ -28,9 +28,12 @@ enum class Linkage { SINGLE, COMPLETE };
 // ─────────────────────────────────────────────
 
 inline double euclidean(const Point& a, const Point& b) {
-    double dx = a.x - b.x;
-    double dy = a.y - b.y;
-    return std::sqrt(dx*dx + dy*dy);
+    double sum = 0.0;
+    for (size_t k = 0; k < a.features.size(); ++k) {
+        double diff = a.features[k] - b.features[k];
+        sum += diff * diff;
+    }
+    return std::sqrt(sum);
 }
 
 // ─────────────────────────────────────────────
@@ -54,6 +57,6 @@ inline double lance_williams(double d_ik, double d_jk, Linkage linkage) {
 
 std::vector<Merge> naive_hac(const std::vector<Point>& points, Linkage linkage);
 
-// std::vector<Merge> ptrad_hac(const std::vector<Point>& points, Linkage linkage, int num_threads);
-std::vector<Merge> seq_pop_hac(const std::vector<Point>& points, Linkage linkage, int c, double delta);
+std::vector<Merge> ptrad_hac(const std::vector<Point>& points, Linkage linkage, int num_threads);
+// std::vector<Merge> seq_pop_hac(const std::vector<Point>& points, Linkage linkage, int c, double delta);
 // std::vector<Merge> ppop_hac(const std::vector<Point>& points, Linkage linkage, int c, double delta, int num_threads);

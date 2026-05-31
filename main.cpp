@@ -2,6 +2,7 @@
 #include <vector>
 #include "datacleaning.h"
 #include "normalization.h"
+#include "hac.h"
 
 int main() {
     std::vector<Song> original_dataset;
@@ -34,5 +35,14 @@ int main() {
         std::cout << "  " << feature_names[i] << ": " << math_matrix[0][i] << "\n";
     }
 
+    // -------------------------------------------------------------------
+    // Step 4 — Clustering (coming next)
+    // -------------------------------------------------------------------
+    std::vector<Point> points;
+    for (const auto& row : math_matrix)
+        points.push_back({row});
+
+    auto dendrogram = naive_hac(points, Linkage::SINGLE);
+    
     return 0;
 }
