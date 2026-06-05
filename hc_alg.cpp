@@ -9,16 +9,6 @@
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Algorithm 1 — Naive Sequential HAC
-//
-//  Complexity:
-//    Time:  O(N^3) — N-1 iterations, each scans O(N^2) pairs
-//    Space: O(N^2) — the distance matrix
-//
-//  Indexing convention:
-//    Original points have ids 0..N-1.
-//    The k-th merge (0-indexed) creates a new cluster with id N+k.
-//    The distance matrix is sized (2N-1)x(2N-1) upfront so every
-//    cluster id, including merged ones, indexes into it directly.
 // ─────────────────────────────────────────────────────────────────────────────
 
 std::vector<Merge> naive_hac(const std::vector<Point>& points, Linkage linkage) {
@@ -269,11 +259,3 @@ std::vector<Merge> ptrad_hac(const std::vector<Point>& points, Linkage linkage, 
 /*Notes : Build initial distances: use length
 Find local min: use TOTAL
 Update distances: use TOTAL */
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  Algorithm 3 — Sequential POP   (coming next)
-// ─────────────────────────────────────────────────────────────────────────────
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  Algorithm 4 — pPOP   (coming next)
-// ─────────────────────────────────────────────────────────────────────────────
